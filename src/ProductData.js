@@ -14,9 +14,9 @@ export const Products = () => {
               title = {data.title}
               gtin = {data.gtin}
               gender = {data.gender}
-              salePrice = {data.sale_price}
+              salePrice = {data.salePrice}
               price = {data.price}
-              image = {data.image_link}
+              image = {data.imageLink}
               />
             </div>
           );
@@ -27,7 +27,7 @@ export const Products = () => {
 };
 
 
-const Product = ({ title, gtin, gender, sale_price, price, image_link }) => {
+const Product = ({ title, gtin, gender, salePrice, price, imageLink }) => {
     if (!title) return <div />;
     return (
       <table>
@@ -43,13 +43,13 @@ const Product = ({ title, gtin, gender, sale_price, price, image_link }) => {
               <h5>{gender}</h5>
             </td>
             <td>
-              <h4>{sale_price}</h4>
+              <h4>{salePrice}</h4>
             </td>
             <td>
               <p>{price}</p>
             </td>
             <td>
-              <p>{image_link}</p>
+              <p>{imageLink}</p>
             </td>
           </tr>
         </tbody>

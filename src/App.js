@@ -17,9 +17,6 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          {/* <Route path="cocktail/:id">
-            <SingleCocktail />
-          </Route> */}
           <Route path="*">
             <Error />
           </Route>
