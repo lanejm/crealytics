@@ -1,12 +1,25 @@
-import React, {useState} from "react";
-import JSONDATA from "../productData.json"
-import {Table} from 'reactstrap'
+import React, { useState } from "react";
+import JSONDATA from "../productData.json";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardSubtitle,
+  Row,
+  Col,
+  CardImg,
+  CardDeck,
+} from "reactstrap";
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const SearchForm = () => {
   const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <div>
       <input
+        className="search-form"
         type="text"
         placeholder="Search..."
         onChange={(event) => {
@@ -15,43 +28,37 @@ const SearchForm = () => {
       />
       {JSONDATA.filter((val) => {
         if (searchTerm === "") {
-          return val
+          return val;
         } else if (val.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-          return val
+          return val;
         }
       }).map((val, key) => {
         return (
-          <Table dark>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>GTIN</th>
-                <th>Gender</th>
-                <th>Sale Price</th>
-                <th>Price</th>
-                <th>Image</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{val.title}</td>
-                <td>{val.gtin}</td>
-                <td>{val.gender}</td>
-                <td>{val.sale_price}</td>
-                <td>{val.price}</td>
-                <td>{val.image_link}</td>
-
-              </tr>
-            </tbody>
-          </Table>
-          // <div className="title" key={key}>
-          //   <p>{val.title}</p>
-          //   <p>{val.gtin}</p>
-          //   <p>{val.gender}</p>
-          //   <p>{val.sale_price}</p>
-          //   <p>{val.price}</p>
-          //   <p>{val.image_link}</p>
-          // </div>
+          <div>
+            <CardDeck className="container" style={{display: 'flex', flexDirection: 'row', justifyContent:'center'}}>
+              <Row>
+                <Col >
+                  <Card className="cards" key={val.title}>
+                    <CardHeader className="section-title" tag="h3">
+                      {val.title}
+                    </CardHeader>
+                    <CardBody className="card-text">
+                      <CardSubtitle tag="h6">gtin: {val.gtin}</CardSubtitle>
+                      <CardSubtitle tag="h6">gender: {val.gender}</CardSubtitle>
+                      <CardSubtitle tag="h6">
+                        sale price: {val.sale_price}
+                      </CardSubtitle>
+                      <CardSubtitle tag="h6">
+                        price: {val.sale_price}
+                      </CardSubtitle>
+                      <CardImg src={val.image_link} alt="product image" />
+                    </CardBody>
+                  </Card>
+                  <br />
+                </Col>
+              </Row>
+            </CardDeck>
+          </div>
         );
       })}
     </div>

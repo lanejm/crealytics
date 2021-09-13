@@ -1,13 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import components
-import Navbar from "./components/Navbar";
 import SearchForm from "./components/SearchForm"
-import PhotoContainer from "./PhotoContainer"
+
+import "./App.css"
 
 function App() {
   return (
+    <div>
    <SearchForm />
+  
+   </div>
   
   );
 }
