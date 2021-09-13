@@ -1,33 +1,60 @@
-import React from "react";
-// import { useGlobalContext } from "../context";
+import React, {useState} from "react";
+import JSONDATA from "../productData.json"
+import {Table} from 'reactstrap'
 
 const SearchForm = () => {
-//   const { setSearchTerm } = useGlobalContext();
-  const searchValue = React.useRef("");
-
-  React.useEffect(() => {
-    searchValue.current.focus();
-  }, []);
-//   const searchCocktail = () => {
-//     setSearchTerm(searchValue.current.value);
-//   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const [searchTerm, setSearchTerm] = useState("");
   return (
-    <section className="section search">
-      <form className="search-form" onSubmit={handleSubmit}>
-        <div className="form-control">
-          <label htmlFor="name">search for items</label>
-          <input
-            type="text"
-            id="name"
-            ref={searchValue}
-            // onChange={searchCocktail}
-          />
-        </div>
-      </form>
-    </section>
+    <div>
+      <input
+        type="text"
+        placeholder="Search..."
+        onChange={(event) => {
+          setSearchTerm(event.target.value);
+        }}
+      />
+      {JSONDATA.filter((val) => {
+        if (searchTerm === "") {
+          return val
+        } else if (val.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+          return val
+        }
+      }).map((val, key) => {
+        return (
+          <Table dark>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>GTIN</th>
+                <th>Gender</th>
+                <th>Sale Price</th>
+                <th>Price</th>
+                <th>Image</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{val.title}</td>
+                <td>{val.gtin}</td>
+                <td>{val.gender}</td>
+                <td>{val.sale_price}</td>
+                <td>{val.price}</td>
+                <td>{val.image_link}</td>
+
+              </tr>
+            </tbody>
+          </Table>
+          // <div className="title" key={key}>
+          //   <p>{val.title}</p>
+          //   <p>{val.gtin}</p>
+          //   <p>{val.gender}</p>
+          //   <p>{val.sale_price}</p>
+          //   <p>{val.price}</p>
+          //   <p>{val.image_link}</p>
+          // </div>
+        );
+      })}
+    </div>
   );
 };
 
